@@ -1,9 +1,8 @@
-import React,{useEffect,useState} from 'react';
+import React,{useState} from 'react';
 import {getRandomPrompt} from '../utils';
 import {FormFiled} from '../components';
 import {preview} from '../assets';
 import {useNavigate} from 'react-router-dom';
-import { Loader } from 'rsuite';
 const CreatePost = () => {
   const navigate=useNavigate();
   const [loading,setLoading]=useState(false);
@@ -18,7 +17,7 @@ const CreatePost = () => {
     if(form?.name && form?.prompt && form?.photo){
       try {
         setLoading(true);
-        await fetch('http://localhost:8080/api/v1/post',{
+        await fetch('https://dall-e2023.onrender.com/api/v1/post',{
           method:'POST',
           headers:{'Content-Type': 'application/json'},
           body:JSON.stringify(form)
@@ -44,7 +43,7 @@ const CreatePost = () => {
     if(form?.prompt){
       try {
         setGeneratingImg(true);
-        const res=await fetch('http://localhost:8080/api/v1/dalle',{
+        const res=await fetch('https://dall-e2023.onrender.com/api/v1/dalle',{
           method:'POST',
           headers:{'Content-type':'application/json'},
           body:JSON.stringify({prompt:form.prompt})

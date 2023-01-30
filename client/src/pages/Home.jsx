@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from 'react'
 import {FormFiled,Card,Loader} from '../components'
-import {useLocation} from 'react-router-dom'
 const RenderCard=({data,title})=>{
     if(data.length > 0){
         return data.map((post,index)=>(
@@ -16,17 +15,16 @@ const RenderCard=({data,title})=>{
 }
 
 const Home = () => {
-    const location=useLocation();
     const [loading,setLoading] =useState(false);
     const [allPosts,setAllPosts]=useState([]);
     const [searchText,setSearchText]=useState('');
-    const [searchResult,setSearchResult]=useState(null);
+    const [searchResult,setSearchResult]=useState([]);
     const [searchTimeOut,setSearchTimeOut]=useState(null);
     useEffect(()=>{
         const fetchPosts = async ()=>{
             try {
                 setLoading(true);
-                const res=await fetch('http://localhost:8080/api/v1/post',{
+                const res=await fetch('https://dall-e2023.onrender.com/api/v1/post',{
                     method:'GET',
                     headers:{'Content-Type':'application/json'}
                 });
